@@ -1,0 +1,379 @@
+/* =====================================================
+   DASHBOARD CONTAINER
+===================================================== */
+
+.dashboard-container{
+    width:92%;
+    margin:35px auto 60px;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.dashboard-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:40px;
+    padding:35px 40px;
+    border-radius:22px;
+    background:linear-gradient(135deg,#0f172a,#1e3a8a);
+    color:white;
+    box-shadow:0 15px 40px rgba(0,0,0,.18);
+}
+
+.header-left{
+    display:flex;
+    align-items:center;
+    gap:22px;
+}
+
+.shield-box{
+    width:85px;
+    height:85px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:20px;
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(8px);
+}
+
+.shield-icon{
+    font-size:42px;
+    color:#60a5fa;
+}
+
+.dashboard-header h1{
+    font-size:42px;
+    font-weight:700;
+    margin-bottom:8px;
+}
+
+.dashboard-header p{
+    font-size:18px;
+    color:#cbd5e1;
+}
+
+.clock-box{
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(10px);
+    border-radius:20px;
+    padding:20px 35px;
+    text-align:center;
+}
+
+.clock-box h2{
+    font-size:38px;
+    color:#38bdf8;
+}
+
+.clock-box p{
+    color:#e2e8f0;
+    font-size:16px;
+}
+
+/* =====================================================
+   CARD GRID
+===================================================== */
+
+.card-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:25px;
+    margin-bottom:45px;
+}
+
+.dashboard-card{
+    color:white;
+    border-radius:20px;
+    padding:35px;
+    text-align:center;
+    transition:.35s;
+    box-shadow:0 12px 30px rgba(0,0,0,.15);
+    position:relative;
+    overflow:hidden;
+}
+
+.dashboard-card::before{
+    content:"";
+    position:absolute;
+    width:120px;
+    height:120px;
+    background:rgba(255,255,255,.15);
+    border-radius:50%;
+    top:-35px;
+    right:-35px;
+}
+
+.dashboard-card:hover{
+    transform:translateY(-10px);
+}
+
+.card-icon{
+    font-size:48px;
+    margin-bottom:20px;
+}
+
+.dashboard-card h2{
+    font-size:44px;
+    margin-bottom:10px;
+}
+
+.dashboard-card p{
+    font-size:18px;
+    letter-spacing:.5px;
+}
+
+/* =====================================================
+   CARD COLORS
+===================================================== */
+
+.users{
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+}
+
+.requests{
+    background:linear-gradient(135deg,#6366f1,#4338ca);
+}
+
+.success{
+    background:linear-gradient(135deg,#22c55e,#16a34a);
+}
+
+.denied{
+    background:linear-gradient(135deg,#ef4444,#dc2626);
+}
+
+.rate{
+    background:linear-gradient(135deg,#f59e0b,#d97706);
+}
+
+.response{
+    background:linear-gradient(135deg,#8b5cf6,#7c3aed);
+}
+
+/* =====================================================
+   CHARTS
+===================================================== */
+
+.charts-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(420px,1fr));
+    gap:25px;
+    margin-bottom:45px;
+}
+
+.chart-card{
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+    transition:.3s;
+}
+
+.chart-card:hover{
+    transform:translateY(-6px);
+}
+
+.chart-card canvas{
+    max-height:320px;
+}
+
+/* =====================================================
+   RECENT LOGS
+===================================================== */
+
+.recent-title{
+    font-size:32px;
+    color:#0f172a;
+    margin-bottom:20px;
+    font-weight:700;
+}
+
+.table-container{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+}
+
+thead{
+    background:#0f172a;
+    color:white;
+}
+
+th{
+    padding:18px;
+    font-size:17px;
+}
+
+td{
+    padding:16px;
+    text-align:center;
+    border-bottom:1px solid #e5e7eb;
+}
+
+tbody tr{
+    transition:.25s;
+}
+
+tbody tr:hover{
+    background:#f8fafc;
+}
+
+/* =====================================================
+   STATUS BADGES
+===================================================== */
+
+.badge{
+    display:inline-block;
+    padding:8px 18px;
+    border-radius:30px;
+    color:white;
+    font-size:14px;
+    font-weight:600;
+}
+
+.success-badge{
+    background:#22c55e;
+}
+
+.denied-badge{
+    background:#ef4444;
+}
+
+.fake-badge{
+    background:#f59e0b;
+}
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.loading{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    height:80vh;
+}
+
+.loading-icon{
+    font-size:70px;
+    color:#2563eb;
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.15);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+
+}
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#2563eb;
+    border-radius:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#f1f5f9;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:992px){
+
+    .dashboard-header{
+        flex-direction:column;
+        gap:25px;
+        text-align:center;
+    }
+
+    .header-left{
+        flex-direction:column;
+    }
+
+    .charts-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .dashboard-header{
+        padding:25px;
+    }
+
+    .dashboard-header h1{
+        font-size:32px;
+    }
+
+    .dashboard-header p{
+        font-size:16px;
+    }
+
+    .clock-box h2{
+        font-size:28px;
+    }
+
+    .dashboard-card h2{
+        font-size:34px;
+    }
+
+    .card-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .dashboard-container{
+        width:96%;
+    }
+
+    .shield-box{
+        width:70px;
+        height:70px;
+    }
+
+    .dashboard-header h1{
+        font-size:26px;
+    }
+
+    th,
+    td{
+        padding:10px;
+        font-size:14px;
+    }
+
+}

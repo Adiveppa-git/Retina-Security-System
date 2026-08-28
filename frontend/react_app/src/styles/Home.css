@@ -1,0 +1,57 @@
+.home{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:90vh;
+    background:#eef4ff;
+}
+
+.hero{
+    text-align:center;
+}
+
+.hero h1{
+    font-size:55px;
+    color:#0f172a;
+    margin-bottom:20px;
+}
+
+.hero h2{
+    color:#2563eb;
+    margin-bottom:20px;
+}
+
+.hero p{
+    font-size:20px;
+    margin-bottom:40px;
+}
+
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+}
+
+.buttons button{
+
+    padding:15px 30px;
+
+    font-size:18px;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    background:#2563eb;
+
+    color:white;
+
+    transition:.3s;
+}
+
+.buttons button:hover{
+
+    background:#1d4ed8;
+}

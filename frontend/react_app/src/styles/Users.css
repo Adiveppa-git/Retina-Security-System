@@ -1,0 +1,119 @@
+.users-container{
+
+    width:90%;
+
+    margin:40px auto;
+}
+
+.users-container h1{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+    color:#1b1b2f;
+}
+
+.search-box{
+
+    width:300px;
+
+    padding:12px;
+
+    font-size:18px;
+
+    margin-bottom:20px;
+
+    border-radius:8px;
+
+    border:1px solid #ccc;
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    background:white;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+thead{
+
+    background:#121a2f;
+
+    color:white;
+}
+
+th,td{
+
+    padding:16px;
+
+    text-align:center;
+}
+
+tbody tr:nth-child(even){
+
+    background:#f7f7f7;
+}
+
+.delete-btn{
+
+    background:#e53935;
+    color:white;
+
+    border:none;
+
+    padding:10px 18px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    transition:.3s;
+
+}
+
+.delete-btn:hover{
+
+    background:#c62828;
+
+    transform:scale(1.05);
+
+}
+
+.update-btn{
+
+    background:#2563eb;
+
+    color:white;
+
+    border:none;
+
+    padding:10px 18px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    transition:.3s;
+
+}
+
+.update-btn:hover{
+
+    background:#1d4ed8;
+
+    transform:scale(1.05);
+
+}

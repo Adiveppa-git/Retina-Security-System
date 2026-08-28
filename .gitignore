@@ -1,0 +1,15 @@
+node_modules/
+frontend/react_app/node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+.vscode/
+*.log
+
+ai_models/trained_models/
+datasets/
+backend/logs/

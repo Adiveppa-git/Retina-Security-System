@@ -1,0 +1,365 @@
+/* ==========================================
+   Verify Page
+========================================== */
+
+.verify-container{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-start;
+
+    gap:60px;
+
+    margin:60px auto;
+
+    flex-wrap:wrap;
+
+    width:95%;
+}
+
+
+/* ==========================================
+   Webcam Card
+========================================== */
+
+.verify-card{
+
+    width:460px;
+
+    background:#fff;
+
+    padding:35px;
+
+    border-radius:20px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:20px;
+
+    transition:.3s;
+}
+
+.verify-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 20px 45px rgba(0,0,0,.18);
+}
+
+.verify-card h2{
+
+    color:#0f172a;
+
+    font-size:38px;
+
+    margin-bottom:10px;
+}
+
+
+.camera-frame{
+
+    position:relative;
+
+    border:4px solid #2563eb;
+
+    border-radius:16px;
+
+    overflow:hidden;
+
+    transition:.5s;
+
+    box-shadow:0 0 15px rgba(37,99,235,.4);
+
+}
+
+.camera-frame video{
+
+    display:block;
+
+}
+
+.camera-frame.success{
+
+    border:4px solid #22c55e;
+
+    box-shadow:
+        0 0 15px #22c55e,
+        0 0 35px #22c55e,
+        0 0 60px #22c55e;
+
+    animation:successGlow 1s infinite alternate;
+
+}
+
+.camera-frame.failed{
+
+    border:4px solid #ef4444;
+
+    box-shadow:
+        0 0 15px #ef4444,
+        0 0 35px #ef4444,
+        0 0 60px #ef4444;
+
+    animation:failedGlow 1s infinite alternate;
+
+}
+
+/* ==========================================
+   Webcam
+========================================== */
+
+.webcam{
+
+    width:100%;
+
+    border:4px solid #2563eb;
+
+    border-radius:18px;
+
+    transition:0.4s;
+
+    overflow:hidden;
+}
+
+/* Success */
+
+.webcam.success{
+
+    border:5px solid #22c55e;
+
+    box-shadow:
+        0 0 15px #22c55e,
+        0 0 35px #22c55e,
+        0 0 60px #22c55e;
+
+    animation:successGlow 1s infinite alternate;
+}
+
+/* Failed */
+
+.webcam.failed{
+
+    border:5px solid #ef4444;
+
+    box-shadow:
+        0 0 15px #ef4444,
+        0 0 35px #ef4444,
+        0 0 60px #ef4444;
+
+    animation:failedGlow 1s infinite alternate;
+}
+
+@keyframes successGlow{
+
+    from{
+
+        box-shadow:
+            0 0 12px #22c55e,
+            0 0 25px #22c55e;
+    }
+
+    to{
+
+        box-shadow:
+            0 0 25px #22c55e,
+            0 0 45px #22c55e,
+            0 0 70px #22c55e;
+    }
+
+}
+
+@keyframes failedGlow{
+
+    from{
+
+        box-shadow:
+            0 0 12px #ef4444,
+            0 0 25px #ef4444;
+    }
+
+    to{
+
+        box-shadow:
+            0 0 25px #ef4444,
+            0 0 45px #ef4444,
+            0 0 70px #ef4444;
+    }
+
+}
+
+
+/* ==========================================
+   Verify Button
+========================================== */
+
+.verify-btn{
+
+    width:100%;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+
+    color:white;
+
+    font-size:20px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.verify-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 25px rgba(37,99,235,.45);
+}
+
+.verify-btn:disabled{
+
+    cursor:not-allowed;
+
+    opacity:.7;
+}
+
+
+/* ==========================================
+   Result Card
+========================================== */
+
+.result-card{
+
+    width:420px;
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:20px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
+
+    transition:.3s;
+}
+
+.result-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 20px 45px rgba(0,0,0,.18);
+}
+
+.result-card h2{
+
+    text-align:center;
+
+    color:#0f172a;
+
+    font-size:34px;
+
+    margin-bottom:25px;
+}
+
+.result-card h3{
+
+    text-align:center;
+
+    margin:20px 0;
+
+    color:#0f172a;
+}
+
+.result-card hr{
+
+    margin:25px 0;
+
+    border:none;
+
+    height:1px;
+
+    background:#e5e7eb;
+}
+
+.result-card p{
+
+    font-size:19px;
+
+    margin:15px 0;
+
+    color:#475569;
+}
+
+.result-card strong{
+
+    color:#0f172a;
+}
+
+
+/* ==========================================
+   Status Colors
+========================================== */
+
+.status-success{
+
+    color:#22c55e;
+
+    font-weight:bold;
+}
+
+.status-failed{
+
+    color:#ef4444;
+
+    font-weight:bold;
+}
+
+.status-warning{
+
+    color:#f59e0b;
+
+    font-weight:bold;
+}
+
+
+/* ==========================================
+   Mobile
+========================================== */
+
+@media(max-width:900px){
+
+    .verify-container{
+
+        flex-direction:column;
+
+        align-items:center;
+
+        gap:35px;
+    }
+
+    .verify-card,
+    .result-card{
+
+        width:95%;
+    }
+
+    .verify-card h2{
+
+        font-size:30px;
+    }
+
+}
