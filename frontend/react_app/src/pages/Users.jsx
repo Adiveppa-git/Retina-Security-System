@@ -121,77 +121,64 @@ function Users() {
   );
 
   return (
-
     <div className="users-container">
+      <div className="users-header">
+        <div>
+          <h1>Registered Users</h1>
+          <div className="users-summary">Total Registered Users: {filteredUsers.length}</div>
+        </div>
+        <input
+          className="search-box"
+          placeholder="🔍 Search User Name..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
 
-      <h1>Registered Users</h1>
-
-      <input
-        className="search-box"
-        placeholder="Search User..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-
-      <h2>Total Users : {filteredUsers.length}</h2>
-
-      <table className="users-table">
-
-        <thead>
-
-          <tr>
-
-            <th>S.No</th>
-
-            <th>User ID</th>
-
-            <th>Rename</th>
-
-            <th>Delete</th>
-
-          </tr>
-
-        </thead>
-
-        <tbody>
-
-          {filteredUsers.map((user) => (
-
-            <tr key={user.id}>
-
-              <td>{user.id}</td>
-
-              <td>{user.name}</td>
-
-              <td>
-
-                <button
-                  className="update-btn"
-                  onClick={() => openDialog(user.name)}
-                >
-                  Rename
-                </button>
-
-              </td>
-
-              <td>
-
-                <button
-                  className="delete-btn"
-                  onClick={() => deleteUser(user.name)}
-                >
-                  Delete
-                </button>
-
-              </td>
-
+      <div className="users-table-card">
+        <table className="users-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>User Name</th>
+              <th>Rename</th>
+              <th>Delete</th>
             </tr>
-
-          ))}
-
-        </tbody>
-
-      </table>
+          </thead>
+          <tbody>
+            {filteredUsers.length === 0 ? (
+              <tr>
+                <td colSpan="4" style={{ textAlign: "center", color: "#64748b", padding: "24px" }}>
+                  No registered users found matching "{search}"
+                </td>
+              </tr>
+            ) : (
+              filteredUsers.map((user) => (
+                <tr key={user.id}>
+                  <td><strong>#{user.id}</strong></td>
+                  <td>{user.name}</td>
+                  <td>
+                    <button
+                      className="update-btn"
+                      onClick={() => openDialog(user.name)}
+                    >
+                      Rename
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      className="delete-btn"
+                      onClick={() => deleteUser(user.name)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
 
       <Dialog
         open={open}

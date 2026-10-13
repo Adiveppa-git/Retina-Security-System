@@ -1,44 +1,43 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import torchvision.models as models
 
 
 class IrisRecognitionCNN(nn.Module):
-    def __init__(self):
+    """
+    Deep Biometric Metric Feature Extractor for Iris Recognition.
+    Maps input Daugman polar normalized iris strips (or iris crops)
+    into a scale-invariant, L2-normalized 512-dimensional feature embedding space.
+    """
+    def __init__(self, embedding_dim=512):
         super(IrisRecognitionCNN, self).__init__()
 
-        print("Initializing Feature Extractor Model...")
+        print(f"Initializing High-Precision Deep Metric Encoder (Embedding Dim: {embedding_dim})...")
 
-        self.features = nn.Sequential(
-            nn.Conv2d(3, 32, 3, padding=1),
-            nn.ReLU(),
-            nn.MaxPool2d(2),
+        # Use MobileNetV3-Large pre-trained backbone for rich feature extraction
+        backbone = models.mobilenet_v3_large(weights=models.MobileNet_V3_Large_Weights.DEFAULT)
+        self.feature_extractor = backbone.features
+        self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
 
-            nn.Conv2d(32, 64, 3, padding=1),
-            nn.ReLU(),
-            nn.MaxPool2d(2),
-
-            nn.Conv2d(64, 128, 3, padding=1),
-            nn.ReLU(),
-            nn.MaxPool2d(2),
-
-            nn.Conv2d(128, 256, 3, padding=1),
-            nn.ReLU(),
-            nn.MaxPool2d(2)
-        )
-
+        # Project 960 features -> 512-D embedding space
         self.fc = nn.Sequential(
-            nn.Flatten(),
-            nn.Linear(256 * 14 * 14, 512),
-            nn.ReLU(),
-            nn.Linear(512, 128)  # 🔥 128-D feature vector
+            nn.Linear(960, 1024),
+            nn.BatchNorm1d(1024),
+            nn.Hardswish(),
+            nn.Dropout(0.2),
+            nn.Linear(1024, embedding_dim)
         )
 
     def forward(self, x):
-        x = self.features(x)
-        x = self.fc(x)
+        # x shape: [batch_size, 3, H, W]
+        feat = self.feature_extractor(x)
+        feat = self.avgpool(feat)
+        feat = torch.flatten(feat, 1)
 
-        # normalize for cosine similarity
-        x = F.normalize(x, p=2, dim=1)
+        embedding = self.fc(feat)
 
-        return x
+        # Crucial for Cosine Similarity & Open-Set Biometric Matching: L2 Normalization
+        embedding = F.normalize(embedding, p=2, dim=1)
+
+        return embedding

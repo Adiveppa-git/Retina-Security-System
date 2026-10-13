@@ -1,10 +1,21 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f8fafc;
 }
 
-body{
-    background:#f5f7fb;
+.app-main-content {
+  flex: 1;
+  width: 100%;
+  max-width: 1450px;
+  margin: 0 auto;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .app-main-content {
+    padding: 16px;
+  }
 }

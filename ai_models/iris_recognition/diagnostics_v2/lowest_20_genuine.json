@@ -1,0 +1,142 @@
+[
+  {
+    "subj": "986",
+    "eye": "L",
+    "p1": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\986\\L\\S5986L00.jpg",
+    "p2": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\986\\L\\S5986L07.jpg",
+    "sim": 0.023928945884108543
+  },
+  {
+    "subj": "946",
+    "eye": "L",
+    "p1": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\946\\L\\S5946L01.jpg",
+    "p2": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\946\\L\\S5946L08.jpg",
+    "sim": 0.07716713845729828
+  },
+  {
+    "subj": "933",
+    "eye": "L",
+    "p1": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\933\\L\\S5933L03.jpg",
+    "p2": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\933\\L\\S5933L08.jpg",
+    "sim": 0.07741936296224594
+  },
+  {
+    "subj": "946",
+    "eye": "L",
+    "p1": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\946\\L\\S5946L00.jpg",
+    "p2": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\946\\L\\S5946L08.jpg",
+    "sim": 0.0783376693725586
+  },
+  {
+    "subj": "946",
+    "eye": "L",
+    "p1": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\946\\L\\S5946L00.jpg",
+    "p2": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\946\\L\\S5946L09.jpg",
+    "sim": 0.08882477879524231
+  },
+  {
+    "subj": "933",
+    "eye": "L",
+    "p1": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\933\\L\\S5933L01.jpg",
+    "p2": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\933\\L\\S5933L08.jpg",
+    "sim": 0.09216839075088501
+  },
+  {
+    "subj": "946",
+    "eye": "L",
+    "p1": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\946\\L\\S5946L01.jpg",
+    "p2": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\946\\L\\S5946L09.jpg",
+    "sim": 0.09375700354576111
+  },
+  {
+    "subj": "977",
+    "eye": "L",
+    "p1": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\977\\L\\S5977L01.jpg",
+    "p2": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\977\\L\\S5977L05.jpg",
+    "sim": 0.09651137888431549
+  },
+  {
+    "subj": "933",
+    "eye": "L",
+    "p1": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\933\\L\\S5933L04.jpg",
+    "p2": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\933\\L\\S5933L07.jpg",
+    "sim": 0.11749066412448883
+  },
+  {
+    "subj": "946",
+    "eye": "L",
+    "p1": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\946\\L\\S5946L00.jpg",
+    "p2": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\946\\L\\S5946L07.jpg",
+    "sim": 0.12292614579200745
+  },
+  {
+    "subj": "946",
+    "eye": "L",
+    "p1": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\946\\L\\S5946L01.jpg",
+    "p2": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\946\\L\\S5946L07.jpg",
+    "sim": 0.12776517868041992
+  },
+  {
+    "subj": "933",
+    "eye": "L",
+    "p1": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\933\\L\\S5933L04.jpg",
+    "p2": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\933\\L\\S5933L08.jpg",
+    "sim": 0.12871448695659637
+  },
+  {
+    "subj": "962",
+    "eye": "L",
+    "p1": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\962\\L\\S5962L01.jpg",
+    "p2": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\962\\L\\S5962L08.jpg",
+    "sim": 0.12878122925758362
+  },
+  {
+    "subj": "955",
+    "eye": "R",
+    "p1": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\955\\R\\S5955R05.jpg",
+    "p2": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\955\\R\\S5955R06.jpg",
+    "sim": 0.12916521728038788
+  },
+  {
+    "subj": "974",
+    "eye": "R",
+    "p1": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\974\\R\\S5974R07.jpg",
+    "p2": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\974\\R\\S5974R08.jpg",
+    "sim": 0.13432925939559937
+  },
+  {
+    "subj": "933",
+    "eye": "L",
+    "p1": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\933\\L\\S5933L02.jpg",
+    "p2": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\933\\L\\S5933L08.jpg",
+    "sim": 0.14187058806419373
+  },
+  {
+    "subj": "974",
+    "eye": "R",
+    "p1": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\974\\R\\S5974R03.jpg",
+    "p2": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\974\\R\\S5974R08.jpg",
+    "sim": 0.1499442756175995
+  },
+  {
+    "subj": "951",
+    "eye": "R",
+    "p1": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\951\\R\\S5951R06.jpg",
+    "p2": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\951\\R\\S5951R08.jpg",
+    "sim": 0.15256060659885406
+  },
+  {
+    "subj": "962",
+    "eye": "L",
+    "p1": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\962\\L\\S5962L01.jpg",
+    "p2": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\962\\L\\S5962L09.jpg",
+    "sim": 0.15293221175670624
+  },
+  {
+    "subj": "946",
+    "eye": "L",
+    "p1": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\946\\L\\S5946L04.jpg",
+    "p2": "C:\\Users\\renki\\Downloads\\iris-security12\\datasets\\CASIA-Iris-Thousand\\946\\L\\S5946L08.jpg",
+    "sim": 0.1589030921459198
+  }
+]

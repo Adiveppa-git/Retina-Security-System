@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from backend.app.services.log_service import get_logs, get_log_stats
+from app.services.log_service import get_logs, get_log_stats
 
 router = APIRouter(
     prefix="/logs",

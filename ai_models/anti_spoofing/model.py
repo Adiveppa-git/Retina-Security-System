@@ -1,38 +1,35 @@
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
+import torchvision.models as models
 
 
 class AntiSpoofCNN(nn.Module):
-
+    """
+    Anti-Spoofing Liveness Classifier.
+    Analyzes high-frequency specular reflections and micro-textures
+    to classify input image into:
+    Class 1: REAL HUMAN EYE
+    Class 0: FAKE / SPOOF (Photo, LCD Screen, Printed Image)
+    """
     def __init__(self):
         super(AntiSpoofCNN, self).__init__()
 
-        print("Initializing CNN model...")
+        print("Initializing Anti-Spoofing Liveness CNN Model...")
+        backbone = models.mobilenet_v3_small(weights=models.MobileNet_V3_Small_Weights.DEFAULT)
+        self.features = backbone.features
+        self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
 
-        self.conv1 = nn.Conv2d(3, 16, kernel_size=3, padding=1)
-        self.conv2 = nn.Conv2d(16, 32, kernel_size=3, padding=1)
-        self.conv3 = nn.Conv2d(32, 64, kernel_size=3, padding=1)
-
-        self.pool = nn.MaxPool2d(2, 2)
-
-        # Original FC layers
-        self.fc1 = nn.Linear(64 * 6 * 6, 64)
-        self.fc2 = nn.Linear(64, 2)
+        self.classifier = nn.Sequential(
+            nn.Linear(576, 128),
+            nn.BatchNorm1d(128),
+            nn.Hardswish(),
+            nn.Dropout(0.3),
+            nn.Linear(128, 2)  # [Fake, Real]
+        )
 
     def forward(self, x):
-
-        x = self.pool(F.relu(self.conv1(x)))
-        x = self.pool(F.relu(self.conv2(x)))
-        x = self.pool(F.relu(self.conv3(x)))
-
-        print("Shape before flatten:", x.shape)
-
-        x = x.view(x.size(0), -1)
-
-        print("Shape before fc1:", x.shape)
-
-        x = F.relu(self.fc1(x))
-        x = self.fc2(x)
-
-        return x
+        feat = self.features(x)
+        feat = self.avgpool(feat)
+        feat = torch.flatten(feat, 1)
+        logits = self.classifier(feat)
+        return logits

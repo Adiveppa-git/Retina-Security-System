@@ -1,6 +1,5 @@
 from fastapi import APIRouter
-
-from backend.app.services.dashboard_service import get_dashboard_data
+from app.services.dashboard_service import get_dashboard_data
 
 router = APIRouter(
     prefix="/dashboard",
@@ -10,5 +9,4 @@ router = APIRouter(
 
 @router.get("/")
 def dashboard():
-
     return get_dashboard_data()

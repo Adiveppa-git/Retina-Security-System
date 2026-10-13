@@ -1,57 +1,209 @@
-.home{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:90vh;
-    background:#eef4ff;
+.home-container {
+  max-width: 1050px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
 }
 
-.hero{
-    text-align:center;
+.hero-card {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 40px 32px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.hero h1{
-    font-size:55px;
-    color:#0f172a;
-    margin-bottom:20px;
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(37, 99, 235, 0.08);
+  color: #2563eb;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 20px;
 }
 
-.hero h2{
-    color:#2563eb;
-    margin-bottom:20px;
+.hero-badge-icon {
+  font-size: 14px;
 }
 
-.hero p{
-    font-size:20px;
-    margin-bottom:40px;
+.hero-title {
+  font-size: 38px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
 }
 
-.buttons{
-    display:flex;
-    justify-content:center;
-    gap:20px;
+.hero-subtitle {
+  font-size: 22px;
+  font-weight: 600;
+  color: #2563eb;
+  margin-bottom: 16px;
 }
 
-.buttons button{
-
-    padding:15px 30px;
-
-    font-size:18px;
-
-    border:none;
-
-    border-radius:8px;
-
-    cursor:pointer;
-
-    background:#2563eb;
-
-    color:white;
-
-    transition:.3s;
+.hero-description {
+  font-size: 16px;
+  color: #475569;
+  max-width: 650px;
+  margin-bottom: 32px;
+  line-height: 1.6;
 }
 
-.buttons button:hover{
+.hero-description strong {
+  color: #0f172a;
+}
 
-    background:#1d4ed8;
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.btn-secondary {
+  background-color: #0f172a;
+  color: #ffffff;
+}
+
+.btn-secondary:hover {
+  background-color: #1e293b;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.25);
+}
+
+.btn-checkin-hero {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+}
+
+.btn-checkin-hero:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-checkout-hero {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: #ffffff;
+}
+
+.btn-checkout-hero:hover {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+/* Feature Cards Grid */
+.features-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.feature-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px 20px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.feature-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+}
+
+.feature-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: #eff6ff;
+  color: #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.feature-icon {
+  font-size: 22px;
+}
+
+.feature-card h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.feature-card p {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+@media (max-width: 900px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero-title {
+    font-size: 30px;
+  }
+
+  .hero-subtitle {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 600px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-card {
+    padding: 28px 20px;
+  }
 }
