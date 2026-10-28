@@ -1,20 +1,20 @@
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../backend")))
+import sqlite3
 
-from app.database.connection import SessionLocal
-from sqlalchemy import inspect
+conn = sqlite3.connect("iris_security_db.sqlite3")
+cursor = conn.cursor()
 
-try:
-    engine = SessionLocal().get_bind()
-    inspector = inspect(engine)
-    tables = inspector.get_table_names()
-    print("MySQL Tables Discovered:", tables)
+tables = cursor.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()
+print("Tables:", tables)
 
-    for t in tables:
-        cols = inspector.get_columns(t)
-        print(f"\nTable '{t}' Columns:")
-        for c in cols:
-            print(f"  - {c['name']} ({c['type']})")
-except Exception as e:
-    print("Database inspection error:", e)
+for (table_name,) in tables:
+    cols = cursor.execute(f"PRAGMA table_info({table_name})").fetchall()
+    print(f"\nTable: {table_name}")
+    for col in cols:
+        print(f"  {col[1]} ({col[2]})")
+    rows = cursor.execute(f"SELECT * FROM {table_name} LIMIT 5").fetchall()
+    print(f"  Sample rows ({len(rows)}):")
+    for r in rows:
+        # print without huge embeddings
+        print("   ", [str(x)[:50] if isinstance(x, str) else x for x in r])
+
+conn.close()

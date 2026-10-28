@@ -224,7 +224,7 @@ function Register() {
               <label>Full Name / User ID *</label>
               <input
                 type="text"
-                placeholder="Example: Adiveppa / Renki (Admin)"
+                placeholder="Enter full name or user ID"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
@@ -235,7 +235,7 @@ function Register() {
               <label>Email Address (Optional)</label>
               <input
                 type="email"
-                placeholder="admin@example.com"
+                placeholder="Enter email address (optional)"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />

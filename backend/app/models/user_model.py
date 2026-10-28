@@ -66,4 +66,24 @@ class AccessLog(Base):
 
 # Plural alias for convenience
 AccessLogs = AccessLog
+
+
+class AdminUser(Base):
+    __tablename__ = "admin_users"
+
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    username = Column(String(100), unique=True, nullable=False, index=True)
+    hashed_password = Column(String(255), nullable=False)
+    full_name = Column(String(150), default="Administrator")
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+
+class AdminSession(Base):
+    __tablename__ = "admin_sessions"
+
+    id = Column(String(64), primary_key=True, index=True)
+    username = Column(String(100), nullable=False, index=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    expires_at = Column(DateTime(timezone=True), nullable=False)
+
 

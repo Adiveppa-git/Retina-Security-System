@@ -1,41 +1,59 @@
+/* ==========================================================================
+   NEXGUARD Registered Users Styles
+   Spacious desktop layout with proportional width and balanced spacing
+   ========================================================================== */
+
 .users-container {
   width: 100%;
-  max-width: 960px;
+  max-width: 1400px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
+  box-sizing: border-box;
 }
 
 .users-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 20px;
+  padding: 4px 0;
+}
+
+.users-header > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .users-container h1 {
-  font-size: 26px;
+  font-size: 28px;
   color: #0f172a;
-  font-weight: 700;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.3px;
 }
 
 .users-summary {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   color: #64748b;
-  margin-bottom: 10px;
+  margin: 0;
 }
 
 .search-box {
-  width: 280px;
-  padding: 10px 14px;
+  width: 340px;
+  max-width: 100%;
+  padding: 12px 18px;
   font-size: 14px;
-  border-radius: 8px;
+  border-radius: 10px;
   border: 1.5px solid #cbd5e1;
   background: #ffffff;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
   transition: all 0.2s ease;
+  box-sizing: border-box;
 }
 
 .search-box:focus {
@@ -45,17 +63,20 @@
 }
 
 .users-table-card {
+  width: 100%;
   background: #ffffff;
-  border-radius: 12px;
+  border-radius: 14px;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
-  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
+  overflow-x: auto;
+  box-sizing: border-box;
 }
 
 .users-table {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
+  min-width: 720px;
 }
 
 .users-table thead {
@@ -65,21 +86,55 @@
 
 .users-table th,
 .users-table td {
-  padding: 14px 20px;
+  padding: 16px 24px;
   font-size: 14px;
+  vertical-align: middle;
 }
 
 .users-table th {
-  font-weight: 600;
+  font-weight: 700;
   color: #cbd5e1;
   text-transform: uppercase;
   font-size: 12px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
+}
+
+/* Distribute columns neatly across desktop */
+.users-table th:nth-child(1),
+.users-table td:nth-child(1) {
+  width: 14%;
+  min-width: 90px;
+}
+
+.users-table th:nth-child(2),
+.users-table td:nth-child(2) {
+  width: 56%;
+  min-width: 260px;
+  font-size: 15px;
+  color: #0f172a;
+}
+
+.users-table th:nth-child(3),
+.users-table td:nth-child(3) {
+  width: 15%;
+  min-width: 130px;
+  text-align: center;
+}
+
+.users-table th:nth-child(4),
+.users-table td:nth-child(4) {
+  width: 15%;
+  min-width: 130px;
+  text-align: center;
 }
 
 .users-table tbody tr {
   border-bottom: 1px solid #f1f5f9;
   transition: background 0.15s ease;
+}
+
+.users-table tbody tr:last-child {
+  border-bottom: none;
 }
 
 .users-table tbody tr:hover {
@@ -90,30 +145,52 @@
   background: #2563eb;
   color: white;
   border: none;
-  padding: 7px 16px;
-  border-radius: 6px;
+  padding: 8px 20px;
+  border-radius: 8px;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.2);
 }
 
 .update-btn:hover {
   background: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
 }
 
 .delete-btn {
   background: #fee2e2;
   color: #dc2626;
   border: none;
-  padding: 7px 16px;
-  border-radius: 6px;
+  padding: 8px 20px;
+  border-radius: 8px;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(220, 38, 38, 0.1);
 }
 
 .delete-btn:hover {
   background: #fca5a5;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(220, 38, 38, 0.2);
+}
+
+@media (max-width: 768px) {
+  .users-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .users-table th,
+  .users-table td {
+    padding: 12px 16px;
+  }
 }

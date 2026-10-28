@@ -10,10 +10,10 @@ function Home() {
           <FaShieldAlt className="hero-badge-icon" /> AI-POWERED BIOMETRIC ACCESS
         </div>
 
-        <h1 className="hero-title">IRIS SECURITY SYSTEM</h1>
+        <h1 className="hero-title">NEXGUARD</h1>
 
         <h2 className="hero-subtitle">
-          AI Based Smart Unauthorized Person Access Detection
+          Intelligent Iris Security and Access Control
         </h2>
 
         <p className="hero-description">

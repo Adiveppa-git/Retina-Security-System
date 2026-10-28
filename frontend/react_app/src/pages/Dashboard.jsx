@@ -67,8 +67,8 @@ function Dashboard() {
             <FaShieldAlt className="shield-icon" />
           </div>
           <div>
-            <h1>Iris Security System</h1>
-            <p>AI-Based Biometric Entry & Exit Management</p>
+            <h1>NEXGUARD</h1>
+            <p>Intelligent Iris Security and Access Control</p>
           </div>
         </div>
 
@@ -301,8 +301,8 @@ function Dashboard() {
                           log.Status === "Success"
                             ? "badge success-badge"
                             : log.Status === "Fake Iris"
-                            ? "badge fake-badge"
-                            : "badge denied-badge"
+                              ? "badge fake-badge"
+                              : "badge denied-badge"
                         }
                       >
                         {log.Status}

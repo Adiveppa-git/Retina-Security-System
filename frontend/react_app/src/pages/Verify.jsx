@@ -39,7 +39,7 @@ function Verify() {
   const [verificationResult, setVerificationResult] = useState(null);
   const [testImageFile, setTestImageFile] = useState(null);
   const [testImagePreview, setTestImagePreview] = useState(null);
-  const [isDiagnosticMode, setIsDiagnosticMode] = useState(true); // Diagnostic / Dry Run by default
+  const [isDiagnosticMode, setIsDiagnosticMode] = useState(false); // Live Verification — Hardware Enabled by default
   const [hwTesting, setHwTesting] = useState(false);
   const [hwFeedback, setHwFeedback] = useState(null);
 
@@ -716,40 +716,10 @@ function Verify() {
 
   return (
     <div className="verify-page-wrapper">
-      <div className="demo-mode-header">
-        <div className="demo-badge">🛡️ TWO-STAGE IDENTITY VERIFICATION</div>
-        <div className={`demo-notice ${isDiagnosticMode ? "notice-diagnostic" : "notice-production"}`}>
-          {isDiagnosticMode ? "Mode: DIAGNOSTIC — HARDWARE SUPPRESSED" : "Mode: LIVE VERIFICATION — HARDWARE ENABLED"}
-        </div>
-      </div>
-
       <div className="verify-three-column-grid">
         {/* BLOCK 1: LIVE CAMERA & CONTROLS */}
         <div className="verify-card block-camera">
           <div className="card-header-title">🛡️ IDENTITY VERIFICATION</div>
-
-          {/* VERIFICATION & HARDWARE MODE SELECTOR */}
-          <div className="mode-toggle-container">
-            <label className="mode-toggle-label">⚡ Verification & Hardware Mode:</label>
-            <div className="mode-btn-group">
-              <button
-                type="button"
-                className={`mode-toggle-btn ${isDiagnosticMode ? "active-diag" : ""}`}
-                onClick={() => handleModeChange(true)}
-                disabled={loading}
-              >
-                🛡️ DIAGNOSTIC — HARDWARE SUPPRESSED
-              </button>
-              <button
-                type="button"
-                className={`mode-toggle-btn ${!isDiagnosticMode ? "active-prod" : ""}`}
-                onClick={() => handleModeChange(false)}
-                disabled={loading}
-              >
-                ⚡ LIVE VERIFICATION — HARDWARE ENABLED
-              </button>
-            </div>
-          </div>
 
           {/* ACCESS ACTION SELECTOR */}
           <div className="action-toggle-container">
@@ -822,57 +792,7 @@ function Verify() {
             )}
           </div>
 
-          <div style={{ margin: "10px 0 6px 0", display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
-            <label
-              style={{
-                cursor: "pointer",
-                padding: "6px 12px",
-                borderRadius: "6px",
-                background: "#1e293b",
-                border: "1px solid #334155",
-                fontSize: "0.8rem",
-                color: "#38bdf8",
-                fontWeight: 600
-              }}
-            >
-              📁 Diagnostic Test Image (Optional)
-              <input
-                type="file"
-                accept="image/*"
-                style={{ display: "none" }}
-                onChange={(e) => {
-                  const file = e.target.files?.[0];
-                  if (file) {
-                    setTestImageFile(file);
-                    const reader = new FileReader();
-                    reader.onloadend = () => setTestImagePreview(reader.result);
-                    reader.readAsDataURL(file);
-                  }
-                }}
-              />
-            </label>
-            {testImageFile && (
-              <button
-                type="button"
-                onClick={() => {
-                  setTestImageFile(null);
-                  setTestImagePreview(null);
-                }}
-                style={{
-                  background: "transparent",
-                  border: "none",
-                  color: "#ef4444",
-                  fontSize: "0.8rem",
-                  cursor: "pointer",
-                  fontWeight: 600
-                }}
-              >
-                ✕ Clear
-              </button>
-            )}
-          </div>
-
-          <div className="button-group">
+          <div className="button-group" style={{ marginTop: "14px" }}>
             <button
               className="verify-btn"
               onClick={runIdentityVerification}

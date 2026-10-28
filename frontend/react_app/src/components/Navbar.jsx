@@ -1,20 +1,30 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { FaShieldAlt, FaBars, FaTimes } from "react-icons/fa";
+import { NavLink, useNavigate } from "react-router-dom";
+import { FaShieldAlt, FaBars, FaTimes, FaSignOutAlt } from "react-icons/fa";
+import { useAuth } from "../context/AuthContext";
 import "../styles/Navbar.css";
 
 function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { logout } = useAuth();
+  const navigate = useNavigate();
 
   const toggleMenu = () => setMobileMenuOpen(!mobileMenuOpen);
   const closeMenu = () => setMobileMenuOpen(false);
+
+  const handleLogout = async () => {
+    closeMenu();
+    await logout();
+    navigate("/login", { replace: true });
+  };
+
 
   return (
     <nav className="navbar">
       <div className="navbar-container">
         <NavLink to="/" className="navbar-brand" onClick={closeMenu}>
           <FaShieldAlt className="brand-icon" />
-          <span>Iris Security System</span>
+          <span className="brand-name">NEXGUARD</span>
         </NavLink>
 
         <button className="mobile-toggle" onClick={toggleMenu} aria-label="Toggle Navigation Menu">
@@ -100,9 +110,22 @@ function Navbar() {
               Dashboard
             </NavLink>
           </li>
+          <li>
+            <button
+              onClick={handleLogout}
+              className="nav-logout-btn"
+              title="Sign Out of IrisGuard"
+              aria-label="Sign Out"
+              id="navbar-logout-btn"
+            >
+              <FaSignOutAlt className="logout-icon" />
+              <span>Logout</span>
+            </button>
+          </li>
         </ul>
       </div>
     </nav>
+
   );
 }
 
