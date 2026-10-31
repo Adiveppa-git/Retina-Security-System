@@ -2,8 +2,14 @@
 #include "driver/gpio.h"
 
 #define LED_PIN 2        // Normal Green/Blue LED (GPIO 2)
-#define BUZZER_PIN 4     // Active Buzzer (GPIO 4)
+#define BUZZER_PIN 4     // MH-FMD Active Buzzer Module (GPIO 4)
 #define RED_LED_PIN 5    // Red Alarm LED (D5 / GPIO 5)
+
+// Active-LOW polarity for MH-FMD "Low level trigger" buzzer module:
+// LOW = Transistor conducts, Buzzer ON
+// HIGH = Transistor cut off, Buzzer OFF
+#define BUZZER_ACTIVE   LOW
+#define BUZZER_INACTIVE HIGH
 
 // State Machine Definitions
 enum SystemState {
@@ -16,9 +22,17 @@ SystemState currentState = STATE_IDLE;
 
 // Configurable timing parameters (non-blocking)
 const unsigned long GREEN_DURATION_MS = 2500;              // 2.5 seconds green LED indicator (2-3s)
-const unsigned long SUCCESS_BEEP_MS = 2000;                 // 2 seconds audible beep on authorized (2s)
+const unsigned long SUCCESS_BEEP_MS = 3000;                 // 3 seconds audible beep on authorized (3s)
 const unsigned long UNAUTHORIZED_BUZZER_DURATION_MS = 10000;// 10 seconds buzzer duration on unauthorized (10s)
 const unsigned long RED_ALARM_DURATION_MS = 15000;         // 15 seconds denied alarm (configurable 10-30s)
+
+// Option C: Double-beep pattern for unauthorized alarm (non-blocking):
+// 150ms ON -> 120ms OFF -> 150ms ON -> 600ms OFF (Total cycle = 1020ms)
+const unsigned long BEEP1_ON_MS = 150;
+const unsigned long BEEP1_OFF_MS = 120;
+const unsigned long BEEP2_ON_MS = 150;
+const unsigned long BEEP2_OFF_MS = 600;
+const unsigned long DOUBLE_BEEP_CYCLE_MS = BEEP1_ON_MS + BEEP1_OFF_MS + BEEP2_ON_MS + BEEP2_OFF_MS; // 1020ms
 
 unsigned long greenSequenceStartTime = 0;
 unsigned long unauthorizedStartTime = 0;
@@ -38,7 +52,7 @@ void setRedLed(bool state) {
 void enterIdleState() {
   currentState = STATE_IDLE;
   setRedLed(false);
-  digitalWrite(BUZZER_PIN, LOW);
+  digitalWrite(BUZZER_PIN, BUZZER_INACTIVE);
   digitalWrite(LED_PIN, LOW);
   isBeeping = false;
 }
@@ -53,9 +67,9 @@ void enterUnauthorizedState() {
   // Reset unauthorized alarm timer
   unauthorizedStartTime = millis();
 
-  // Red LED and Buzzer continuously ON for the alarm duration
+  // Red LED continuously ON for the alarm duration, and start double-beep cycle immediately (Beep 1 ON)
   setRedLed(true);
-  digitalWrite(BUZZER_PIN, HIGH);
+  digitalWrite(BUZZER_PIN, BUZZER_ACTIVE);
 
   Serial.println("[ESP32] UNAUTHORIZED - RED & BUZZER ACTIVE (AUTO TIMEOUT 15s)");
 }
@@ -71,7 +85,7 @@ void enterAuthorizedState() {
   greenSequenceStartTime = millis();
 
   // Short success beep
-  digitalWrite(BUZZER_PIN, HIGH);
+  digitalWrite(BUZZER_PIN, BUZZER_ACTIVE);
   beepStartTime = millis();
   isBeeping = true;
 
@@ -84,7 +98,18 @@ void setup() {
   pinMode(BUZZER_PIN, OUTPUT);
   pinMode(RED_LED_PIN, OUTPUT);
 
-  // 2. Hardware-level clean reset for GPIO 5 (D5 / RED_LED_PIN):
+  // 2. Hardware-level clean reset for GPIO 4 (D4 / BUZZER_PIN):
+  // Configure push-pull output with maximum drive strength (GPIO_DRIVE_CAP_3 ~40mA)
+  // Ensure buzzer starts in silent/inactive state (HIGH for active-LOW trigger)
+  gpio_reset_pin(GPIO_NUM_4);
+  gpio_set_direction(GPIO_NUM_4, GPIO_MODE_OUTPUT);
+  gpio_pullup_dis(GPIO_NUM_4);
+  gpio_pulldown_dis(GPIO_NUM_4);
+  gpio_set_level(GPIO_NUM_4, 1);
+  gpio_set_drive_capability(GPIO_NUM_4, GPIO_DRIVE_CAP_3);
+  digitalWrite(BUZZER_PIN, BUZZER_INACTIVE);
+
+  // 3. Hardware-level clean reset for GPIO 5 (D5 / RED_LED_PIN):
   // Disconnect any ROM strapping / VSPI CS defaults, disable internal pull-ups,
   // enforce push-pull output with maximum drive strength, and drive firmly to 0V (LOW).
   gpio_reset_pin(GPIO_NUM_5);
@@ -135,11 +160,21 @@ void loop() {
       setRedLed(true);
       digitalWrite(LED_PIN, LOW);
 
-      // Buzzer sounds for 10 seconds, then turns off
+      // Buzzer sounds for 10 seconds with Option C Double-Beep pattern:
+      // 150ms ON -> 120ms OFF -> 150ms ON -> 600ms OFF (repeating non-blocking cycle)
       if (currentMillis - unauthorizedStartTime < UNAUTHORIZED_BUZZER_DURATION_MS) {
-        digitalWrite(BUZZER_PIN, HIGH);
+        unsigned long cycleTime = (currentMillis - unauthorizedStartTime) % DOUBLE_BEEP_CYCLE_MS;
+        if (cycleTime < BEEP1_ON_MS) {
+          digitalWrite(BUZZER_PIN, BUZZER_ACTIVE);
+        } else if (cycleTime < BEEP1_ON_MS + BEEP1_OFF_MS) {
+          digitalWrite(BUZZER_PIN, BUZZER_INACTIVE);
+        } else if (cycleTime < BEEP1_ON_MS + BEEP1_OFF_MS + BEEP2_ON_MS) {
+          digitalWrite(BUZZER_PIN, BUZZER_ACTIVE);
+        } else {
+          digitalWrite(BUZZER_PIN, BUZZER_INACTIVE);
+        }
       } else {
-        digitalWrite(BUZZER_PIN, LOW);
+        digitalWrite(BUZZER_PIN, BUZZER_INACTIVE);
       }
 
       if (currentMillis - unauthorizedStartTime >= RED_ALARM_DURATION_MS) {
@@ -152,18 +187,37 @@ void loop() {
       // Red LED remains OFF
       setRedLed(false);
 
-      // Handle short success beep
+      // Handle green LED duration (2.5s)
+      if (currentMillis - greenSequenceStartTime >= GREEN_DURATION_MS) {
+        digitalWrite(LED_PIN, LOW);
+      } else {
+        digitalWrite(LED_PIN, HIGH);
+      }
+
+      // Handle double-beep pattern for authorized access (3.0s duration):
+      // 150ms ON -> 120ms OFF -> 150ms ON -> 600ms OFF (repeating non-blocking cycle)
       if (isBeeping) {
-        if (currentMillis - beepStartTime >= SUCCESS_BEEP_MS) {
-          digitalWrite(BUZZER_PIN, LOW);
+        if (currentMillis - beepStartTime < SUCCESS_BEEP_MS) {
+          unsigned long cycleTime = (currentMillis - beepStartTime) % DOUBLE_BEEP_CYCLE_MS;
+          if (cycleTime < BEEP1_ON_MS) {
+            digitalWrite(BUZZER_PIN, BUZZER_ACTIVE);
+          } else if (cycleTime < BEEP1_ON_MS + BEEP1_OFF_MS) {
+            digitalWrite(BUZZER_PIN, BUZZER_INACTIVE);
+          } else if (cycleTime < BEEP1_ON_MS + BEEP1_OFF_MS + BEEP2_ON_MS) {
+            digitalWrite(BUZZER_PIN, BUZZER_ACTIVE);
+          } else {
+            digitalWrite(BUZZER_PIN, BUZZER_INACTIVE);
+          }
+        } else {
+          digitalWrite(BUZZER_PIN, BUZZER_INACTIVE);
           isBeeping = false;
         }
       } else {
-        digitalWrite(BUZZER_PIN, LOW);
+        digitalWrite(BUZZER_PIN, BUZZER_INACTIVE);
       }
 
-      // Check if green indication duration (2.5s) has expired
-      if (currentMillis - greenSequenceStartTime >= GREEN_DURATION_MS) {
+      // Return to normal idle state once authorized sequence is complete (3.0s beep and 2.5s LED)
+      if (!isBeeping && (currentMillis - greenSequenceStartTime >= GREEN_DURATION_MS)) {
         enterIdleState();
         Serial.println("[ESP32] IDLE - GREEN OFF");
       }
@@ -172,7 +226,7 @@ void loop() {
     case STATE_IDLE:
     default:
       setRedLed(false);
-      digitalWrite(BUZZER_PIN, LOW);
+      digitalWrite(BUZZER_PIN, BUZZER_INACTIVE);
       digitalWrite(LED_PIN, LOW);
       break;
   }
